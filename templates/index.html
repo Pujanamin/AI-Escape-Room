@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Escape Room — Version 2</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="room">
+    <header>
+      <p class="eyebrow">THE CLOCKWORK STUDY · VERSION 2</p>
+      <h1>Find your way out.</h1>
+      <p class="subheading">Solve each riddle to unlock the next part of the room.</p>
+    </header>
+    <section class="status" aria-live="polite">
+      <span id="progress">Puzzle 1 of 3</span>
+      <span id="hint-count">Hints remaining: 3</span>
+      <span class="ai-status">{{ "AI hints enabled" if ai_configured else "Offline hints enabled" }}</span>
+    </section>
+    <section class="puzzle-card">
+      <h2>Current clue</h2>
+      <p id="puzzle">Loading the room…</p>
+    </section>
+    <section class="conversation" aria-label="Room conversation" aria-live="polite" id="conversation"></section>
+    <form id="answer-form">
+      <label for="answer">Your answer</label>
+      <div class="controls">
+        <input id="answer" name="answer" maxlength="500" autocomplete="off" required>
+        <button type="submit">Unlock</button>
+      </div>
+    </form>
+    <div class="actions">
+      <button id="hint" class="secondary" type="button">Ask for a hint</button>
+      <button id="restart" class="secondary" type="button">Restart room</button>
+    </div>
+    <p id="notice" role="status" class="notice"></p>
+    <footer>Game rules, answers and progress are controlled by the server; AI only suggests optional hints.</footer>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>
